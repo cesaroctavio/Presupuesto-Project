@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Bi-Monthly Budget</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="main-header glass-panel">
+            <h1 class="greeting">Mi Presupuesto</h1>
+            <div class="balance-card">
+                <p>Balance Disponible</p>
+                <h2 id="total-balance">$0.00</h2>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" data-q="1">Quincena 1</button>
+                <button class="tab-btn" data-q="2">Quincena 2</button>
+                <button class="tab-btn" data-q="dashboard">Mes</button>
+            </div>
+        </header>
+
+        <!-- Main Content (scrollable) -->
+        <main class="content-area">
+            
+            <!-- Quincena Wrapper -->
+            <div id="quincena-view">
+            
+            <section class="category-section">
+                <div class="section-header">
+                    <h3>Ingresos</h3>
+                    <span id="sum-ingresos" class="sum-positive">$0.00</span>
+                </div>
+                <div class="list-container" id="list-ingresos">
+                    <!-- JS renders items here -->
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="section-header">
+                    <h3>Ahorros</h3>
+                    <span id="sum-ahorros" class="sum-negative">$0.00</span>
+                </div>
+                <div class="list-container" id="list-ahorros">
+                    <!-- JS renders items here -->
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="section-header">
+                    <h3>Bills (Fijos)</h3>
+                    <span id="sum-bills" class="sum-negative">$0.00</span>
+                </div>
+                <div class="list-container" id="list-bills">
+                    <!-- JS renders items here -->
+                </div>
+            </section>
+
+            <section class="category-section">
+                <div class="section-header">
+                    <h3>TDC y Suscripciones</h3>
+                    <span id="sum-tdc" class="sum-negative">$0.00</span>
+                </div>
+                <div class="list-container" id="list-tdc">
+                    <!-- JS renders items here -->
+                </div>
+            </section>
+            </div>
+
+            <!-- Dashboard View -->
+            <div id="dashboard-view" class="hidden">
+                <section class="category-section">
+                    <div class="section-header">
+                        <h3>Balance Global del Mes</h3>
+                    </div>
+                    <div class="glass-panel" style="padding: 20px; border-radius: 12px; text-align: center;">
+                        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">Ahorro neto restante tras pagar todo</p>
+                        <h2 id="dash-balance" style="font-size: 2.5rem; margin-top: 5px;">$0.00</h2>
+                    </div>
+                </section>
+                
+                <section class="category-section">
+                    <div class="section-header">
+                        <h3>Distribución de Dinero</h3>
+                    </div>
+                    <div class="glass-panel" style="padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                       <p style="margin-bottom: 8px; font-size: 0.95rem;">Ahorros e Inversión <span style="float: right;" id="dash-pct-ahorros">0%</span></p>
+                       <div class="progress-bar-bg"><div class="progress-bar-fill income" id="dash-bar-ahorros" style="width: 0%;"></div></div>
+                       
+                       <p style="margin-top: 20px; margin-bottom: 8px; font-size: 0.95rem;">Bills Fijos <span style="float: right;" id="dash-pct-bills">0%</span></p>
+                       <div class="progress-bar-bg"><div class="progress-bar-fill expense" id="dash-bar-bills" style="width: 0%;"></div></div>
+                       
+                       <p style="margin-top: 20px; margin-bottom: 8px; font-size: 0.95rem;">TDC y Suscripciones <span style="float: right;" id="dash-pct-tdc">0%</span></p>
+                       <div class="progress-bar-bg"><div class="progress-bar-fill negative-alert" id="dash-bar-tdc" style="width: 0%;"></div></div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Bottom spacing for FAB -->
+            <div style="height: 100px;"></div>
+        </main>
+
+        <!-- Floating Action Button -->
+        <button class="fab" id="fab-add">
+            <i class="fas fa-plus"></i>
+        </button>
+
+        <!-- Add Transaction Modal -->
+        <div class="modal-overlay hidden" id="add-modal">
+            <div class="modal glass-panel">
+                <div class="modal-header">
+                    <h3>Nuevo Movimiento</h3>
+                    <button class="close-btn" id="close-modal"><i class="fas fa-times"></i></button>
+                </div>
+                <form id="add-form">
+                    <div class="form-group">
+                        <label>Tipo</label>
+                        <select id="input-tipo" required>
+                            <option value="ingresos">Ingreso</option>
+                            <option value="ahorros">Ahorro</option>
+                            <option value="bills">Bill Fijo</option>
+                            <option value="tdc">TDC / Suscripción</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Concepto</label>
+                        <input type="text" id="input-concepto" placeholder="Ej. Quincena de trabajo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Monto</label>
+                        <input type="number" step="0.01" id="input-monto" placeholder="0.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Asignar a Quincena</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="input-quincena" value="1" checked> Q1</label>
+                            <label><input type="radio" name="input-quincena" value="2"> Q2</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
