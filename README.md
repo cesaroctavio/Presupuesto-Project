@@ -23,11 +23,13 @@ Una aplicación web moderna diseñada para la gestión financiera personal bi-me
 Para ejecutar este proyecto localmente, asegúrate de tener [Node.js](https://nodejs.org/) instalado.
 
 1. **Instalar dependencias**:
+
    ```bash
    npm install
    ```
 
 2. **Iniciar servidor de desarrollo**:
+
    ```bash
    npm run dev
    ```
@@ -54,4 +56,4 @@ src/
 
 ---
 
-*Proyecto migrado a React para mejorar la escalabilidad y el rendimiento.*
+_Proyecto migrado a React para mejorar la escalabilidad y el rendimiento._
