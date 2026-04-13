@@ -1,3 +1,0 @@
-module.exports=[4900,a=>{"use strict";var b=a.i(97614);a.s([],19357),a.i(19357),a.s(["401dfc4b48c816c80df0c9fa1c7050065b273b159f",()=>b.getBudgets,"402a0a4929cc157bf2a67043f8c8950df750730068",()=>b.getTransactions,"402f2766742adcdfbdc214146f393d1315eb24e0ca",()=>b.deleteTransaction,"40d81369d873c328ffd1b75bc4e712ffcd75ad2b04",()=>b.addTransaction,"6088d5fa6025f7bf026536b01812954ef672afc7da",()=>b.updateTransaction,"7004af3aabf03e857f2a3b6214960ac5162ae6f19a",()=>b.setBudget],4900)}];
-
-//# sourceMappingURL=_next-internal_server_app_page_actions_0ktnabg.js.map

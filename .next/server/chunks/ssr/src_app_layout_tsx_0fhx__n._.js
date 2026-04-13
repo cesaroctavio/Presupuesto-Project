@@ -1,3 +1,0 @@
-module.exports=[27572,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsxs)("html",{lang:"es",children:[(0,b.jsxs)("head",{children:[(0,b.jsx)("link",{rel:"stylesheet",href:"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"}),(0,b.jsx)("link",{href:"https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap",rel:"stylesheet"})]}),(0,b.jsx)("body",{children:a})]})},"metadata",0,{title:"Mi Presupuesto",description:"Control Quincenal"}])},50645,a=>{a.n(a.i(27572))}];
-
-//# sourceMappingURL=src_app_layout_tsx_0fhx__n._.js.map
